@@ -223,9 +223,10 @@ export default function OurStoryPage() {
                 <h3 className="text-xl font-medium leading-tight text-slate-900 md:text-2xl">Who it helps</h3>
                 <p>
                   For organizations operating in climate technology, this system provides a clear view of where adoption
-                  is accelerating, where demand is emerging, and where market opportunities exist. By translating
-                  fragmented public data into structured analytics, the platform reduces uncertainty and supports
-                  strategic decision-making, capital allocation, and long-term planning.
+                  is accelerating, where demand is emerging, and where market opportunities exist. We also help
+                  governments track progress toward climate targets with greater clarity by translating fragmented public
+                  data into structured analytics. This in return supports strategic decision-making, capital allocation, and long-term
+                  planning.
                 </p>
               </div>
               <div

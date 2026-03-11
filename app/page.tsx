@@ -109,7 +109,8 @@ export default function Page() {
           </h2>
           <p className="max-w-2xl text-base font-light leading-relaxed text-slate-600 md:pt-2 md:text-lg">
             CCIN gives governments, companies, and investors a transparent way to track climate transition momentum
-            through leading indicators, helping them spot gaps sooner and act with greater confidence.
+            through leading indicators, helping them spot gaps sooner, support clean sector initiatives, and keep
+            government programs aligned with their goals.
           </p>
         </section>
 
