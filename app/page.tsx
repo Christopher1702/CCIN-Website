@@ -11,7 +11,26 @@ const footerCtaImage =
 
 export default function Page() {
   const [visibleSections, setVisibleSections] = useState<number[]>([]);
+  const [emailCopied, setEmailCopied] = useState(false);
   const sectionRefs = useRef<(HTMLElement | null)[]>([]);
+  const emailResetTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const handleCopyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText('ccin@gmail.com');
+      setEmailCopied(true);
+
+      if (emailResetTimeoutRef.current) {
+        clearTimeout(emailResetTimeoutRef.current);
+      }
+
+      emailResetTimeoutRef.current = setTimeout(() => {
+        setEmailCopied(false);
+      }, 1800);
+    } catch {
+      setEmailCopied(false);
+    }
+  };
 
   useEffect(() => {
     if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -44,6 +63,14 @@ export default function Page() {
     });
 
     return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (emailResetTimeoutRef.current) {
+        clearTimeout(emailResetTimeoutRef.current);
+      }
+    };
   }, []);
 
   const sectionRevealStyle = (index: number) => ({
@@ -280,19 +307,16 @@ export default function Page() {
               <p className="mx-auto mt-3 max-w-xl text-sm font-light leading-7 text-white/90 md:text-base">
                 Build stronger climate programs with clearer intelligence, sharper measurement, and decision-ready insight.
               </p>
-              <form className="mx-auto mt-6 flex w-full max-w-md items-center rounded-full border border-lime-100/50 bg-white/20 p-1 backdrop-blur-sm">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="w-full bg-transparent px-4 text-sm text-white placeholder:text-white/80 outline-none"
-                />
+              <div className="mx-auto mt-6 flex w-full max-w-md items-center justify-between gap-3 rounded-full border border-lime-100/50 bg-white/20 p-1 pl-5 backdrop-blur-sm">
+                <span className="text-sm text-white/90">ccin@gmail.com</span>
                 <button
                   type="button"
+                  onClick={handleCopyEmail}
                   className="rounded-full bg-lime-400 px-6 py-2 text-sm font-semibold text-lime-950 transition-colors hover:bg-lime-300"
                 >
-                  Submit
+                  {emailCopied ? 'Copied' : 'Copy Email'}
                 </button>
-              </form>
+              </div>
             </div>
 
             <div className="mt-10 grid gap-10 text-slate-700 md:grid-cols-4">
